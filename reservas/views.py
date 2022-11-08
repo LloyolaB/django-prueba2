@@ -33,9 +33,9 @@ def editar_reserva(request, id):
         form = FormActualizarReserva(request.POST, instance=queryset)
         if form.is_valid():
             form.save()
-        return index(request)
+        return listar_reservas(request)
     data = {"form": form}
-    return render(request, "listar_reservas.html", data)
+    return render(request, "editar_reserva.html", data)
 
 
 def eliminar_reserva(request, id):
