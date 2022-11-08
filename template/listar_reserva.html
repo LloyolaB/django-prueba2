@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title%}Listar Reservas{% endblock %}
+{% block content%}
+<div class="alert alert-info display-1 text-center">Listado de Reservas</div>
+
+{% if reserva %}
+<table class="table table-striped table-inverse table-responsive">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Fecha Reserva</th>
+            <th>Hora Reserva</th>
+            <th>Cantidad Personas</th>
+            <th>Estado</th>
+            <th>Observación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reser in reserva %}
+        <tr>
+            <td>{{reser.nombre}}</td>
+            <td>{{reser.telefono}}</td>
+            <td>{{reser.fecha}}</td>
+            <td>{{reser.hora}}</td>
+            <td>{{reser.qty_personas}}</td>
+            <td>{{reser.get_estado_display}}</td>
+            <td>{{reser.comentario}}</td>
+            <td><a href="{% url 'editar_reserva' reser.id %}" class="btn btn-warning ">Editar</a>
+                <a href="{% url 'eliminar_reserva' reser.id %}" class="btn btn-danger ">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning " role="alert">
+    <strong>No se encuentran Reservas en el sistema</strong>
+</div>
+
+{% endif %}
+
+<a href="../" class="btn btn-danger">VOLVER</a>
+<a href="../agregar" class="btn btn-info float-end">Agregar Reserva</a>
+{% endblock %}
